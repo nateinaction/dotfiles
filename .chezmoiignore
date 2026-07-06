@@ -1,3 +1,4 @@
 # Repo tooling, not dotfiles — don't apply these to the home directory.
 flake.nix
 flake.lock
+renovate.json

@@ -1,5 +1,5 @@
 {
-  description = "User-scoped CLI tools installed into my Nix profile (gh, claude-code)";
+  description = "User-scoped CLI tools installed into my Nix profile";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
@@ -23,6 +23,7 @@
           paths = [
             pkgs.gh # GitHub CLI (MIT, Go)
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
+            pkgs.starship # Cross-shell prompt (ISC, Rust)
           ];
         };
 
