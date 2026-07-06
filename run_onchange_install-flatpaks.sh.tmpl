@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+#
+# Reconstitute my Flatpak apps declaratively.
+#
+# The desired set lives in ~/.config/user-packages/flatpaks.txt, split into
+# [user] and [system] sections. This mirrors the Nix user-packages profile: a
+# fresh machine gets the same apps from the same `chezmoi apply` that lays down
+# the rest of my dotfiles.
+#
+# chezmoi re-runs this script whenever the app list changes (content hash):
+#   flatpaks.txt: {{ include "dot_config/user-packages/flatpaks.txt" | sha256sum }}
+
+set -euo pipefail
+
+list="${HOME}/.config/user-packages/flatpaks.txt"
+
+# Flatpak is provided by the stableOS image. If it is not on PATH, skip rather
+# than failing the whole apply.
+if ! command -v flatpak >/dev/null 2>&1; then
+  echo "flatpak not found on PATH; skipping flatpak app install" >&2
+  exit 0
+fi
+
+# Parse the manifest into per-scope app-ID arrays. A `[scope]` header switches
+# the active scope; comments and blank lines are ignored.
+user_apps=()
+system_apps=()
+scope=""
+while IFS= read -r line; do
+  line="${line%%#*}"                       # strip trailing comments
+  line="$(echo "${line}" | xargs || true)" # trim whitespace
+  [ -z "${line}" ] && continue
+  case "${line}" in
+    "[user]")   scope="user"   ;;
+    "[system]") scope="system" ;;
+    *)
+      case "${scope}" in
+        user)   user_apps+=("${line}")   ;;
+        system) system_apps+=("${line}") ;;
+        *) echo "app '${line}' before any [user]/[system] header; ignoring" >&2 ;;
+      esac
+      ;;
+  esac
+done <"${list}"
+
+# install_scope <--user|--system> <app...>: ensure the Flathub remote exists in
+# the given installation, then install any missing apps (idempotent).
+install_scope() {
+  local scope_flag="$1"
+  shift
+  [ "$#" -eq 0 ] && return 0
+
+  flatpak remote-add "${scope_flag}" --if-not-exists flathub \
+    https://dl.flathub.org/repo/flathub.flatpakrepo
+
+  local installed
+  installed="$(flatpak list --app "${scope_flag}" --columns=application)"
+  local app
+  for app in "$@"; do
+    if ! grep -qxF "${app}" <<<"${installed}"; then
+      echo "installing ${app} (${scope_flag#--})"
+      flatpak install "${scope_flag}" --noninteractive --or-update flathub "${app}"
+    fi
+  done
+}
+
+install_scope --user "${user_apps[@]}"
+install_scope --system "${system_apps[@]}"

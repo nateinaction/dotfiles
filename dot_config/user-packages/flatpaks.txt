@@ -1,0 +1,23 @@
+# Flatpak applications, installed declaratively on `chezmoi apply`.
+#
+# Format: `[user]` / `[system]` section headers, then one app ID per line.
+# Lines starting with `#` and blank lines are ignored. Apps are installed from
+# Flathub, mirroring how ~/.config/user-packages/flake.nix manages my per-user
+# Nix profile.
+#
+#   [user]   -> `flatpak install --user`   (no privileges, per-user state)
+#   [system] -> `flatpak install --system` (system-wide, needs polkit auth)
+#
+# To add an app: install it into the desired scope, then add its ID under the
+# matching section so a fresh machine reproduces it.
+
+[user]
+com.cassidyjames.butler
+com.discordapp.Discord
+com.visualstudio.code
+md.obsidian.Obsidian
+
+[system]
+com.onepassword.OnePassword
+net.ankiweb.Anki
+org.mozilla.firefox
