@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# Reconstitute my user-scoped CLI tools (gh, claude-code) into the Nix profile.
+#
+# These tools are user state, not part of the stableOS image: they live in
+# ~/.config/user-packages/flake.nix and are installed into my per-user Nix
+# profile. Keeping them here means a fresh machine gets them from the same
+# `chezmoi apply` that lays down the rest of my dotfiles.
+#
+# chezmoi re-runs this script whenever the flake changes (content hashes below):
+#   flake.nix:  {{ include "dot_config/user-packages/flake.nix" | sha256sum }}
+#   flake.lock: {{ include "dot_config/user-packages/flake.lock" | sha256sum }}
+
+set -euo pipefail
+
+flake="${HOME}/.config/user-packages"
+
+# Nix is provided by the stableOS image (socket-activated daemon). If it is not
+# on PATH yet, skip rather than failing the whole apply.
+if ! command -v nix >/dev/null 2>&1; then
+  echo "nix not found on PATH; skipping user-packages profile install" >&2
+  exit 0
+fi
+
+# Idempotent: upgrade the "user-cli-tools" profile entry in place if it already
+# exists, otherwise add it (first run / fresh machine).
+if nix profile list | grep -q 'user-cli-tools'; then
+  nix profile upgrade user-cli-tools
+else
+  nix profile add "${flake}#user-cli-tools"
+fi
