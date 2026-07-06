@@ -1,0 +1,29 @@
+name: pre-commit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Cache pre-commit hooks
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+
+      # Run through the flake dev shell so pre-commit and fish (needed by the
+      # local lint-fish hook) match the versions used locally.
+      - name: Run pre-commit
+        run: nix develop -c pre-commit run --all-files --show-diff-on-failure
