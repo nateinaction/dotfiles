@@ -1,0 +1,30 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v6.0.0
+  hooks:
+    - id: trailing-whitespace
+    - id: end-of-file-fixer
+    - id: check-yaml
+    - id: check-json
+    - id: check-toml
+    - id: check-added-large-files
+
+- repo: https://github.com/codespell-project/codespell
+  rev: v2.4.2
+  hooks:
+    - id: codespell
+      args: ['--ignore-words=.codespellignore']
+
+- repo: https://github.com/rvben/rumdl-pre-commit
+  rev: v0.2.28
+  hooks:
+    - id: rumdl
+      args: ['--no-cache']
+
+- repo: local
+  hooks:
+    - id: lint-fish
+      name: Check fish config syntax
+      entry: fish --no-execute
+      language: system
+      files: \.fish$
