@@ -1,0 +1,10 @@
+[user]
+	signingkey = 7ABD0C69B5269234
+	name = Nate Gay
+	email = email@n8.gay
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/bin/gpg
+[core]
+	editor = hx
