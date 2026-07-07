@@ -26,6 +26,7 @@
             pkgs.fish # Friendly interactive shell (GPL-2)
             pkgs.fzf # Command-line fuzzy finder (MIT, Go)
             pkgs.gh # GitHub CLI (MIT, Go)
+            pkgs.git # Distributed version control system (GPL-2)
             pkgs.gnupg # GNU Privacy Guard (GPL-3)
             pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
