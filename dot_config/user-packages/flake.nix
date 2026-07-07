@@ -24,6 +24,13 @@
             pkgs.gh # GitHub CLI (MIT, Go)
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
+
+            # Go toolchain + Helix language support
+            pkgs.go # Go compiler/toolchain (BSD-3)
+            pkgs.gopls # Go language server (BSD-3)
+            pkgs.golangci-lint # Go meta-linter (GPL-3), backs golangci-lint-langserver
+            pkgs.golangci-lint-langserver # LSP wrapper for golangci-lint (MIT)
+            pkgs.delve # Go debugger, provides `dlv` (MIT)
           ];
         };
 
