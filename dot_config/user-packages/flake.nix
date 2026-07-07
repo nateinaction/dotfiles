@@ -35,7 +35,7 @@
             pkgs.golangci-lint # Go meta-linter (GPL-3), backs golangci-lint-langserver
             pkgs.golangci-lint-langserver # LSP wrapper for golangci-lint (MIT)
             pkgs.delve # Go debugger, provides `dlv` (MIT)
-          ];
+          ] ++ (if builtins.pathExists ./work.nix then import ./work.nix pkgs else []);
         };
 
         default = self.packages.${pkgs.stdenv.hostPlatform.system}.user-cli-tools;

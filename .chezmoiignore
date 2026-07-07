@@ -5,3 +5,9 @@ renovate.json
 
 # Secret fish configs laid down by chezmoi template.
 *.secret.fish
+
+# Work-only files — skip on personal machines.
+{{ if not .work }}
+.config/user-packages/work.nix
+.config/fish/conf.d/work.*.fish
+{{ end }}

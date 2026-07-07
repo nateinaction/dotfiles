@@ -5,4 +5,8 @@ set -gx PATH $PATH "$HOME/.local/bin"
 
 if status is-interactive
     alias ll="ls -lah"
+{{- if .work }}
+
+    # Work aliases
+{{- end }}
 end
