@@ -4,9 +4,8 @@
 
 Install the following before running `chezmoi apply`:
 
-- [1Password CLI](https://www.1password.dev/cli/get-started#install)
-- [Fish](https://fishshell.com/)
 - [Chezmoi](https://www.chezmoi.io/install/)
+- [1Password CLI](https://www.1password.dev/cli/get-started#install)
 
 ## Work configuration
 
@@ -19,9 +18,8 @@ Is this a work machine? (yes/no)
 
 Answering **yes** enables:
 
-- **Aliases** -- work-specific shell aliases in `~/.config/fish/config.fish`
+- **Aliases/Secrets** -- work-specific shell aliases in `~/.config/fish/conf.d/`
 - **Packages** -- additional Nix packages defined in `~/.config/user-packages/work.nix`
-- **Secrets** -- work-specific fish configs matching `work.*.fish` in `conf.d/`
 
 To change the setting later, re-run:
 

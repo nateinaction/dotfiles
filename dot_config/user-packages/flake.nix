@@ -21,15 +21,15 @@
         user-cli-tools = pkgs.buildEnv {
           name = "user-cli-tools";
           paths = [
-            pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
-            pkgs.gh # GitHub CLI (MIT, Go)
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
-            pkgs.starship # Cross-shell prompt (ISC, Rust)
-            pkgs._1password-cli # 1Password CLI, provides `op` (unfree)
-            pkgs.zoxide # Smarter cd command (MIT, Rust)
+            pkgs.fish # Friendly interactive shell (GPL-2)
             pkgs.fzf # Command-line fuzzy finder (MIT, Go)
+            pkgs.gh # GitHub CLI (MIT, Go)
+            pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
+            pkgs.starship # Cross-shell prompt (ISC, Rust)
+            pkgs.zoxide # Smarter cd command (MIT, Rust)
 
-            # Go toolchain + Helix language support
+            # Go toolchain
             pkgs.go # Go compiler/toolchain (BSD-3)
             pkgs.gopls # Go language server (BSD-3)
             pkgs.golangci-lint # Go meta-linter (GPL-3), backs golangci-lint-langserver
