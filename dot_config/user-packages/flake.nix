@@ -26,6 +26,8 @@
             pkgs.fish # Friendly interactive shell (GPL-2)
             pkgs.fzf # Command-line fuzzy finder (MIT, Go)
             pkgs.gh # GitHub CLI (MIT, Go)
+            pkgs.gnupg # GNU Privacy Guard (GPL-3)
+            pkgs.pinentry-curses # Passphrase entry dialog for GnuPG (GPL-2)
             pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
             pkgs.zoxide # Smarter cd command (MIT, Rust)
@@ -36,6 +38,12 @@
             pkgs.golangci-lint # Go meta-linter (GPL-3), backs golangci-lint-langserver
             pkgs.golangci-lint-langserver # LSP wrapper for golangci-lint (MIT)
             pkgs.delve # Go debugger, provides `dlv` (MIT)
+
+            # Kubernetes tooling
+            pkgs.kubectl # Kubernetes command-line client (Apache-2.0)
+            pkgs.kubectx # Utility to manage and switch contexts (Apache-2.0)
+            pkgs.kustomize # Customization of Kubernetes YAML configurations (Apache-2.0)
+            pkgs.k9s # Kubernetes cluster manager TUI (Apache-2.0)
           ] ++ (if builtins.pathExists ./work.nix then import ./work.nix pkgs else []);
         };
 

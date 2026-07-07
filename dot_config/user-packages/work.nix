@@ -2,8 +2,6 @@
 # The user-packages flake.nix merges these into the user-cli-tools profile
 # when this file exists.
 pkgs: with pkgs; [
-  # Add work-specific packages here, e.g.:
-  # awscli2
-  # kubectl
-  # terraform
+  azure-cli # Azure command-line client (MIT)
+  google-cloud-sdk # Google Cloud CLI (Apache-2.0)
 ]
