@@ -22,6 +22,7 @@
           name = "user-cli-tools";
           paths = [
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
+            pkgs.direnv # Load project-specific environments (MIT, Rust)
             pkgs.fish # Friendly interactive shell (GPL-2)
             pkgs.fzf # Command-line fuzzy finder (MIT, Go)
             pkgs.gh # GitHub CLI (MIT, Go)
