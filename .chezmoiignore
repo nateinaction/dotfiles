@@ -2,3 +2,9 @@
 flake.nix
 flake.lock
 renovate.json
+
+# COSMIC: session/runtime state and machine-specific paths, not portable prefs.
+.config/cosmic/com.system76.CosmicAppList/**
+.config/cosmic/com.system76.CosmicWorkspaces/**
+.config/cosmic/com.system76.CosmicBackground/**
+.config/cosmic/com.system76.CosmicSettings.Wallpaper/**
