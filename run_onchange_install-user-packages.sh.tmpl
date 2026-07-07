@@ -31,7 +31,7 @@ nix() {
 
 # Idempotent: upgrade the "user-cli-tools" profile entry in place if it already
 # exists, otherwise add it (first run / fresh machine).
-if nix profile list | grep -q 'user-cli-tools'; then
+if nix profile list | sed 's/\x1b\[[0-9;]*m//g' | grep -q 'user-cli-tools'; then
   nix profile upgrade user-cli-tools
 else
   nix profile add "${flake}#user-cli-tools"
