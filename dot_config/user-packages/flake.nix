@@ -25,6 +25,8 @@
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
             pkgs._1password-cli # 1Password CLI, provides `op` (unfree)
+            pkgs.zoxide # Smarter cd command (MIT, Rust)
+            pkgs.fzf # Command-line fuzzy finder (MIT, Go)
 
             # Go toolchain + Helix language support
             pkgs.go # Go compiler/toolchain (BSD-3)
