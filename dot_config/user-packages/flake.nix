@@ -27,10 +27,14 @@
             pkgs.fzf # Command-line fuzzy finder (MIT, Go)
             pkgs.gh # GitHub CLI (MIT, Go)
             pkgs.gnupg # GNU Privacy Guard (GPL-3)
-            pkgs.pinentry-curses # Passphrase entry dialog for GnuPG (GPL-2)
             pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
             pkgs.zoxide # Smarter cd command (MIT, Rust)
+
+            # Passphrase entry dialog for GnuPG
+            (if pkgs.stdenv.isDarwin
+              then pkgs.pinentry_mac # macOS Keychain-integrated pinentry (GPL-2)
+              else pkgs.pinentry-curses) # Terminal pinentry (GPL-2)
 
             # Go toolchain
             pkgs.go # Go compiler/toolchain (BSD-3)

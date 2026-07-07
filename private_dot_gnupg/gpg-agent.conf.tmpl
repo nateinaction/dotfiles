@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.os "darwin" }}
+pinentry-program {{ .chezmoi.homeDir }}/.nix-profile/bin/pinentry-mac
+{{- else }}
+pinentry-program {{ .chezmoi.homeDir }}/.nix-profile/bin/pinentry-curses
+{{- end }}
