@@ -14,10 +14,8 @@
 [user]
 com.cassidyjames.butler
 com.discordapp.Discord
-com.visualstudio.code
 md.obsidian.Obsidian
 
 [system]
-com.onepassword.OnePassword
 net.ankiweb.Anki
 org.mozilla.firefox
