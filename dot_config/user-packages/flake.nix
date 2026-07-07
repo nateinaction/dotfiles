@@ -24,6 +24,7 @@
             pkgs.gh # GitHub CLI (MIT, Go)
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
+            pkgs._1password-cli # 1Password CLI, provides `op` (unfree)
 
             # Go toolchain + Helix language support
             pkgs.go # Go compiler/toolchain (BSD-3)
