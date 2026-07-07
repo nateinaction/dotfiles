@@ -22,6 +22,13 @@ if ! command -v nix >/dev/null 2>&1; then
   exit 0
 fi
 
+# `nix profile` and flake refs need these experimental features. Pass them
+# explicitly so this works regardless of whether the machine's nix.conf
+# enables them (e.g. a stock Nix install on macOS).
+nix() {
+  command nix --extra-experimental-features "nix-command flakes" "$@"
+}
+
 # Idempotent: upgrade the "user-cli-tools" profile entry in place if it already
 # exists, otherwise add it (first run / fresh machine).
 if nix profile list | grep -q 'user-cli-tools'; then
