@@ -1,2 +1,5 @@
 [global]
 hide_env_diff = true
+# Disable the "is taking a while to execute" warning (default 5s is routinely
+# exceeded by Nix flake evaluation).
+warn_timeout = "0"
