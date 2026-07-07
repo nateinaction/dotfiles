@@ -30,6 +30,7 @@
             pkgs.gnupg # GNU Privacy Guard (GPL-3)
             pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
+            pkgs.warp-terminal # Rust-based terminal, provides `warp-terminal` (AGPL-3, MIT)
             pkgs.zoxide # Smarter cd command (MIT, Rust)
 
             # Passphrase entry dialog for GnuPG
