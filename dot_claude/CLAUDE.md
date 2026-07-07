@@ -1,8 +1,16 @@
-# Environment
+# Agent Directives
+
+## Git
+
+- Do not run `git commit`.
+- Never attribute Claude or Claude Code anywhere — commit messages, GitHub
+  issues/PRs, or documentation.
+
+## Environment
 
 This machine runs an **immutable Fedora Atomic** distribution (rpm-ostree based, e.g. Silverblue/Kinoite/Bluefin). The base OS image is read-only and updated atomically. Do **not** assume you can freely `dnf install` packages into the system — layering packages with `rpm-ostree install` is possible but discouraged and requires a reboot. Avoid mutating the base system.
 
-## Dependency management: use Nix
+### Dependency management: use Nix
 
 Manage project and development dependencies with **Nix**, not system packages or `rpm-ostree` layering. This keeps the base OS clean and makes environments reproducible and per-project.
 
