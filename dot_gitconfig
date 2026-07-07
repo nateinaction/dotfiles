@@ -1,6 +1,6 @@
 [core]
 	excludesFile = ~/.gitignore
-	editor = /usr/bin/vim
+	editor = ~/.nix-profile/bin/hx
 [commit]
 	template = ~/.stCommitMsg
 	gpgsign = true
