@@ -1,10 +1,19 @@
-[user]
-	signingkey = 7ABD0C69B5269234
-	name = Nate Gay
-	email = email@n8.gay
-[commit]
-	gpgsign = true
-[gpg]
-	program = /usr/bin/gpg
 [core]
-	editor = hx
+	excludesFile = ~/.gitignore
+	editor = /usr/bin/vim
+[commit]
+	template = ~/.stCommitMsg
+	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[gpg]
+	program = gpg
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main
+[include]
+	path = ~/.gitconfig.local

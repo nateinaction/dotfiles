@@ -1,0 +1,8 @@
+# Generic utilities
+{{- if stat (printf "%s/.local/bin" .chezmoi.homeDir) }}
+set -gx PATH $PATH "$HOME/.local/bin"
+{{- end }}
+
+if status is-interactive
+    alias ll="ls -lah"
+end
