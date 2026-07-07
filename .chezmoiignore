@@ -2,3 +2,6 @@
 flake.nix
 flake.lock
 renovate.json
+
+# Secret fish configs laid down by chezmoi template.
+*.secret.fish

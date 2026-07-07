@@ -21,6 +21,7 @@
         user-cli-tools = pkgs.buildEnv {
           name = "user-cli-tools";
           paths = [
+            pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
             pkgs.gh # GitHub CLI (MIT, Go)
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
