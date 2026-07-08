@@ -2,6 +2,7 @@ theme = "nightwolf"
 
 [editor.file-picker]
 hidden = false
+git-ignore = false
 
 [keys.normal]
 
