@@ -1,0 +1,7 @@
+# Hand off to the Nix-provided fish for interactive shells.
+# The OS login shell stays a base-OS binary, so a missing or broken
+# nix profile can never lock you out -- worst case you land in bash.
+if [[ $- == *i* && -z "$FISH_LAUNCHED" && -x "$HOME/.nix-profile/bin/fish" ]]; then
+    export FISH_LAUNCHED=1
+    exec "$HOME/.nix-profile/bin/fish"
+fi
