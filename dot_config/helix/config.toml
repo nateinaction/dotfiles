@@ -1,5 +1,8 @@
 theme = "nightwolf"
 
+[editor.file-picker]
+hidden = false
+
 [keys.normal]
 
 # Move lines up and down
