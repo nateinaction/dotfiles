@@ -1,0 +1,7 @@
+layout {
+    pane split_direction="Horizontal" {
+        pane name="code" command="claude"
+        pane name="helix" command="hx"
+        pane name="shell"
+    }
+}

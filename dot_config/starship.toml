@@ -1,0 +1,106 @@
+# Starship prompt configuration
+# Managed by chezmoi
+#
+# Dark powerline: muted dark surface backgrounds with accent-colored icons/text.
+
+format = """
+[](bg_a)\
+$directory\
+[](fg:bg_a bg:bg_b)\
+$git_branch\
+$git_status\
+[](fg:bg_b bg:bg_a)\
+$nodejs\
+$rust\
+$golang\
+$python\
+[](fg:bg_a bg:bg_b)\
+$nix_shell\
+[](fg:bg_b)\
+$fill\
+$cmd_duration\
+$time\
+$line_break\
+$character"""
+
+palette = "custom"
+
+# Catppuccin Mocha — dark surfaces for backgrounds, accents for foreground text.
+[palettes.custom]
+bg_a = "#313244"     # surface0 (darker segment)
+bg_b = "#45475a"     # surface1 (lighter segment)
+text = "#cdd6f4"     # main text
+blue = "#89b4fa"
+green = "#a6e3a1"
+mauve = "#cba6f7"
+sky = "#89dceb"
+muted = "#6c7086"
+
+[fill]
+symbol = " "
+
+[directory]
+style = "bg:bg_a"
+format = "[ ](bg:bg_a)[](fg:blue bg:bg_a)[ $path ](fg:text bg:bg_a)"
+truncation_length = 3
+truncation_symbol = "…/"
+read_only = " "
+
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:bg_b"
+format = "[ $symbol ](fg:green bg:bg_b)[$branch ](fg:text bg:bg_b)"
+
+[git_status]
+style = "bg:bg_b"
+format = "[$all_status$ahead_behind ](fg:green bg:bg_b)"
+
+[nodejs]
+symbol = ""
+style = "bg:bg_a"
+format = "[ $symbol ](fg:mauve bg:bg_a)[$version ](fg:text bg:bg_a)"
+
+[rust]
+symbol = ""
+style = "bg:bg_a"
+format = "[ $symbol ](fg:mauve bg:bg_a)[$version ](fg:text bg:bg_a)"
+
+[golang]
+symbol = ""
+style = "bg:bg_a"
+format = "[ $symbol ](fg:mauve bg:bg_a)[$version ](fg:text bg:bg_a)"
+
+[python]
+symbol = ""
+style = "bg:bg_a"
+format = "[ $symbol ](fg:mauve bg:bg_a)[$version ](fg:text bg:bg_a)"
+
+# Only show a clean snowflake — drop the noisy "impure( nix-shell-env )"
+[nix_shell]
+symbol = "❄️ "
+style = "bg:bg_b"
+format = "[ $symbol](fg:sky bg:bg_b)[$state ](fg:text bg:bg_b)"
+impure_msg = "impure"
+pure_msg = "pure"
+
+[cmd_duration]
+min_time = 500
+style = "fg:muted"
+format = "[  $duration ]($style)"
+
+[time]
+disabled = false
+time_format = "%R"
+style = "fg:muted"
+format = "[ $time ]($style)"
+
+[character]
+success_symbol = "[❯](bold blue)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"

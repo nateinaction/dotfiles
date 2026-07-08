@@ -36,3 +36,21 @@ if nix profile list | sed 's/\x1b\[[0-9;]*m//g' | grep -q 'user-cli-tools'; then
 else
   nix profile add "${flake}#user-cli-tools"
 fi
+
+# Fonts installed into the Nix profile live under ~/.nix-profile/share/fonts,
+# which desktop apps (terminals, launched outside a Nix shell) don't search.
+# Link them into the per-user font directory the OS's apps do search, so the
+# Nerd Font is selectable in terminal preferences.
+nix_fonts="${HOME}/.nix-profile/share/fonts/truetype/NerdFonts/JetBrainsMono"
+if [ -d "${nix_fonts}" ]; then
+  if [ "$(uname -s)" = "Darwin" ]; then
+    # macOS apps (Terminal.app, iTerm2) search ~/Library/Fonts; no fc-cache.
+    mkdir -p "${HOME}/Library/Fonts"
+    ln -sfn "${nix_fonts}" "${HOME}/Library/Fonts/JetBrainsMonoNerdFont"
+  else
+    # Linux/XDG apps search ~/.local/share/fonts; refresh the fontconfig cache.
+    mkdir -p "${HOME}/.local/share/fonts"
+    ln -sfn "${nix_fonts}" "${HOME}/.local/share/fonts/JetBrainsMonoNerdFont"
+    command -v fc-cache >/dev/null 2>&1 && fc-cache -f "${HOME}/.local/share/fonts" >/dev/null 2>&1 || true
+  fi
+fi
