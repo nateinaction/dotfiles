@@ -51,6 +51,9 @@
             pkgs.kubectx # Utility to manage and switch contexts (Apache-2.0)
             pkgs.kustomize # Customization of Kubernetes YAML configurations (Apache-2.0)
             pkgs.k9s # Kubernetes cluster manager TUI (Apache-2.0)
+
+            # Terraform tooling
+            pkgs.tenv # Terraform/Tofu/Terragrunt version manager (Apache-2.0)
           ] ++ (if builtins.pathExists ./work.nix then import ./work.nix pkgs else []);
         };
 
