@@ -1,5 +1,6 @@
 if status is-interactive
     alias ll="ls -lah"
+    set -g fish_greeting
 end
 
 # Default editor
