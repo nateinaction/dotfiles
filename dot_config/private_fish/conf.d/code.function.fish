@@ -5,8 +5,7 @@ function code
     end
 
     set -l path (cd "$argv[1]" 2>/dev/null && pwd || echo "$argv[1]")
-    # Create unique session name from path hash
-    set -l session_name "code-"(echo -n "$path" | sha1sum | cut -c1-8)
+    set -l session_name "code-"(basename "$path")
 
     # Attach if the session already exists
     if zellij list-sessions -s 2>/dev/null | grep -qx "$session_name"
