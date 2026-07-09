@@ -1,9 +1,9 @@
 layout {
     pane split_direction="Vertical" {
-        pane size="50%" name="agent" command="claude" start_suspended=false
+        pane size="50%" name="agent" command="claude"
         pane split_direction="Horizontal" {
-            pane size="50%" name="editor" command="hx" start_suspended=false
-            pane size="50%" name="shell" command="fish" start_suspended=false
+            pane size="50%" name="editor" command="hx"
+            pane size="50%" name="shell" command="fish"
         }
     }
 }
