@@ -9,5 +9,5 @@ chars = "\u001B\r"
 [terminal]
 
 [terminal.shell]
-program = "/Users/nate.gay/.nix-profile/bin/fish"
+program = "{{ .chezmoi.homeDir }}/.nix-profile/bin/fish"
 args = ["-i", "-c", "exec zellij -l welcome"]
