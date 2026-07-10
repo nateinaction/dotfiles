@@ -7,7 +7,5 @@ pkgs: with pkgs; [
 
   # PHP Tooling
   php # PHP interpreter (PHP-3.01)
-  phpunit # PHP testing framework (BSD-3)
   phpPackages.composer # PHP dependency manager (MIT)
-  phpPackages.php-codesniffer # PHP code style checker/fixer, provides phpcs/phpcbf (BSD-3)
 ]
