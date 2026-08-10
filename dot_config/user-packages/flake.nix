@@ -22,6 +22,7 @@
           name = "user-cli-tools";
           paths = [
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
+            pkgs.codex # OpenAI Codex CLI (unfree)
             pkgs.direnv # Load project-specific environments (MIT, Rust)
             pkgs.fish # Friendly interactive shell (GPL-2)
             pkgs.fzf # Command-line fuzzy finder (MIT, Go)
@@ -31,6 +32,7 @@
             pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
             pkgs.nerd-fonts.jetbrains-mono # JetBrainsMono Nerd Font, glyphs for starship (OFL)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
+            pkgs.tailscale # Mesh VPN CLI (BSD-3)
             pkgs.zellij # Terminal workspace/multiplexer (MIT, Rust)
             pkgs.zoxide # Smarter cd command (MIT, Rust)
 

@@ -550,8 +550,9 @@ default_shell "fish"
 // show_release_notes false
 
 // Whether to enable mouse hover effects and pane grouping functionality
+// (also controls scroll-wheel-to-resize-pane behavior)
 // default is true
-// advanced_mouse_actions false
+advanced_mouse_actions false
 
 // Whether to enable mouse hover visual effects (frame highlight and help text)
 // default is true
