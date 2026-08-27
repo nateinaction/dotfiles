@@ -30,6 +30,7 @@
             pkgs.git # Distributed version control system (GPL-2)
             pkgs.gnupg # GNU Privacy Guard (GPL-3)
             pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
+            pkgs.jaq # JSON processor (jq-compatible), used by the Claude Code statusline script (MIT, Rust)
             pkgs.nerd-fonts.jetbrains-mono # JetBrainsMono Nerd Font, glyphs for starship (OFL)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
             pkgs.tailscale # Mesh VPN CLI (BSD-3)
