@@ -8,3 +8,8 @@ fi
 
 # Use jaq (Rust, jq-compatible) in place of jq
 alias jq="jaq"
+
+# Docker Desktop (credential helper binaries: docker-credential-desktop, etc.)
+{{- if stat "/Applications/Docker.app/Contents/Resources/bin" }}
+export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
+{{- end }}
