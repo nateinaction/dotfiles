@@ -38,7 +38,7 @@
             pkgs.zoxide # Smarter cd command (MIT, Rust)
 
             # Passphrase entry dialog for GnuPG
-            (if pkgs.stdenv.isDarwin
+            (if pkgs.stdenv.hostPlatform.isDarwin
               then pkgs.pinentry_mac # macOS Keychain-integrated pinentry (GPL-2)
               else pkgs.pinentry-curses) # Terminal pinentry (GPL-2)
 
