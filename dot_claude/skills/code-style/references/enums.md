@@ -29,28 +29,3 @@ literals, an int with a comment, or a pair of booleans.
 Where a language offers no enum, the equivalent is a sum type, a tagged union,
 or a small set of singleton values used the same way. The rules are unchanged;
 what varies is how much of the checking the compiler does for you.
-
-## Across a boundary
-
-An enum in a schema — a proto field, a request or response body, a stored
-column — carries constraints an in-language enum doesn't, because the sender
-and the receiver are versioned separately. This is
-[AIP-126](https://google.aip.dev/126), and it applies whether or not the
-boundary is REST.
-
-- **The zero value is the enum's own name plus `_UNSPECIFIED`** —
-  `FORMAT_UNSPECIFIED`. Where a wire format gives an absent field the zero
-  value, zero must mean "nobody said." Any other member in that slot gets
-  chosen silently every time the field is omitted.
-- **Unless zero has a clearly useful meaning.** If the enum needs an `UNKNOWN`
-  member regardless, make that the zero instead of carrying both — one concept,
-  one value. Prefix it with the enum name the same way, to avoid collisions.
-- **A value set that changes frequently is a string, not an enum.** Adding a
-  member is a schema change every consumer has to absorb; AIP-126 puts the bar
-  at roughly one new value a year. Where the set churns faster, accept a
-  documented string and validate it at the edge — and document the allowed
-  values where the field is defined.
-- **Receiving an unrecognized member is expected, not a bug.** A peer may be
-  newer than you. The boundary parse decides what an unknown value becomes —
-  an error, or an explicit "other" member — before the core sees it, so the
-  core still matches exhaustively over a set it can enumerate.
