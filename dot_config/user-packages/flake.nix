@@ -34,6 +34,7 @@
             pkgs.nerd-fonts.jetbrains-mono # JetBrainsMono Nerd Font, glyphs for starship (OFL)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
             pkgs.tailscale # Mesh VPN CLI (BSD-3)
+            pkgs.watch # Execute a program periodically, from procps (GPL-2)
             pkgs.zellij # Terminal workspace/multiplexer (MIT, Rust)
             pkgs.zoxide # Smarter cd command (MIT, Rust)
 
