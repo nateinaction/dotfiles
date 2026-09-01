@@ -50,8 +50,12 @@
             pkgs.golangci-lint-langserver # LSP wrapper for golangci-lint (MIT)
             pkgs.delve # Go debugger, provides `dlv` (MIT)
 
+            # Python tooling
+            pkgs.uv # Python package/project manager (Apache-2.0/MIT, Rust)
+
             # Container image tooling
             pkgs.crane # Tool for interacting with remote container images/registries (Apache-2.0)
+            pkgs.container-structure-test # Validate container image structure/contents (Apache-2.0)
 
             # Kubernetes tooling
             pkgs.kubectl # Kubernetes command-line client (Apache-2.0)
