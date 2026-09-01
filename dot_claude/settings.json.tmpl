@@ -9,7 +9,16 @@
     "DISABLE_TELEMETRY": "1",
     "DO_NOT_TRACK": "1"
   },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
   "model": "claude-sonnet-5",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true{{ if .work }},
     "fluid-platform-debugging@internal-ai-marketplace": true{{ end }}
@@ -22,14 +31,6 @@
       }
     }
   }{{ end }},
-  "attribution": {
-    "commit": "",
-    "pr": "",
-    "sessionUrl": false
-  },
   "effortLevel": "medium",
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.sh"
-  }
+  "tui": "fullscreen"
 }
