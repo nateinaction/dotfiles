@@ -44,7 +44,7 @@
               else pkgs.pinentry-curses) # Terminal pinentry (GPL-2)
 
             # Go toolchain
-            pkgs.go # Go compiler/toolchain (BSD-3)
+            pkgs.go_1_27 # Go compiler/toolchain (BSD-3)
             pkgs.gopls # Go language server (BSD-3)
             pkgs.golangci-lint # Go meta-linter (GPL-3), backs golangci-lint-langserver
             pkgs.golangci-lint-langserver # LSP wrapper for golangci-lint (MIT)
