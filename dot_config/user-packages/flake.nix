@@ -56,6 +56,7 @@
             # Container image tooling
             pkgs.crane # Tool for interacting with remote container images/registries (Apache-2.0)
             pkgs.container-structure-test # Validate container image structure/contents (Apache-2.0)
+            pkgs.dive # Explore a container image's layers to find ways to shrink it (MIT, Go)
 
             # Kubernetes tooling
             pkgs.kubectl # Kubernetes command-line client (Apache-2.0)
