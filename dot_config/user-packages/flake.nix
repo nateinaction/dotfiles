@@ -53,6 +53,10 @@
             # Python tooling
             pkgs.uv # Python package/project manager (Apache-2.0/MIT, Rust)
 
+            # Rust toolchain
+            pkgs.cargo # Rust package manager/build tool (MIT/Apache-2.0)
+            pkgs.rustc # Rust compiler (MIT/Apache-2.0)
+
             # Container image tooling
             pkgs.crane # Tool for interacting with remote container images/registries (Apache-2.0)
             pkgs.container-structure-test # Validate container image structure/contents (Apache-2.0)
