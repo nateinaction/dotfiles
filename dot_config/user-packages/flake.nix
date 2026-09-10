@@ -21,6 +21,7 @@
         user-cli-tools = pkgs.buildEnv {
           name = "user-cli-tools";
           paths = [
+            pkgs.age # Simple, modern file encryption tool (BSD-3, Go)
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
             pkgs.codex # OpenAI Codex CLI (unfree)
             pkgs.direnv # Load project-specific environments (MIT, Rust)
