@@ -15,11 +15,14 @@ set -euo pipefail
 
 flake="${HOME}/.config/user-packages"
 
-# Nix is provided by the stableOS image (socket-activated daemon). If it is not
-# on PATH yet, skip rather than failing the whole apply.
+# Nix is provided by the stableOS image (socket-activated daemon) and should
+# be on PATH by the time run_onchange scripts execute. Fail loudly rather than
+# exiting 0: chezmoi records success by this script's rendered content hash,
+# so a silent skip would be indistinguishable from a real install and would
+# never be retried until the flake next changes.
 if ! command -v nix >/dev/null 2>&1; then
-  echo "nix not found on PATH; skipping user-packages profile install" >&2
-  exit 0
+  echo "nix not found on PATH; cannot install user-packages profile" >&2
+  exit 1
 fi
 
 # `nix profile` and flake refs need these experimental features. Pass them
