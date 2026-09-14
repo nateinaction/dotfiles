@@ -3,7 +3,9 @@
 # when this file exists.
 pkgs: with pkgs; [
   azure-cli # Azure command-line client (MIT)
-  google-cloud-sdk # Google Cloud CLI (Apache-2.0)
+  (google-cloud-sdk.withExtraComponents [
+    google-cloud-sdk.components.gke-gcloud-auth-plugin # kubectl auth plugin for GKE clusters (Apache-2.0)
+  ])
   k3d # k3s in Docker (MIT)
   docker # Docker CLI, daemon provided by Docker Desktop/OrbStack (Apache-2.0)
 
