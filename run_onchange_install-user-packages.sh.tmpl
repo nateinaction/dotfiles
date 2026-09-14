@@ -10,6 +10,7 @@
 # chezmoi re-runs this script whenever the flake changes (content hashes below):
 #   flake.nix:  {{ include "dot_config/user-packages/flake.nix" | sha256sum }}
 #   flake.lock: {{ include "dot_config/user-packages/flake.lock" | sha256sum }}
+#   work.nix:   {{ if (stat (joinPath .chezmoi.sourceDir "dot_config/user-packages/work.nix")) }}{{ include "dot_config/user-packages/work.nix" | sha256sum }}{{ else }}absent{{ end }}
 
 set -euo pipefail
 
