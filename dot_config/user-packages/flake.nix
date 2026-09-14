@@ -22,6 +22,7 @@
           name = "user-cli-tools";
           paths = [
             pkgs.age # Simple, modern file encryption tool (BSD-3, Go)
+            pkgs.alacritty # GPU-accelerated terminal emulator (Apache-2.0, Rust)
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
             pkgs.codex # OpenAI Codex CLI (unfree)
             pkgs.direnv # Load project-specific environments (MIT, Rust)
@@ -33,6 +34,7 @@
             pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
             pkgs.jaq # JSON processor (jq-compatible), used by the Claude Code statusline script (MIT, Rust)
             pkgs.nerd-fonts.jetbrains-mono # JetBrainsMono Nerd Font, glyphs for starship (OFL)
+            pkgs.obsidian # Knowledge base / markdown note-taking app (proprietary, unfree)
             pkgs.starship # Cross-shell prompt (ISC, Rust)
             pkgs.tailscale # Mesh VPN CLI (BSD-3)
             pkgs.watch # Execute a program periodically, from procps (GPL-2)
@@ -62,6 +64,7 @@
             pkgs.crane # Tool for interacting with remote container images/registries (Apache-2.0)
             pkgs.container-structure-test # Validate container image structure/contents (Apache-2.0)
             pkgs.dive # Explore a container image's layers to find ways to shrink it (MIT, Go)
+            pkgs.podman # Daemonless container engine (Apache-2.0)
 
             # Kubernetes tooling
             pkgs.kubectl # Kubernetes command-line client (Apache-2.0)

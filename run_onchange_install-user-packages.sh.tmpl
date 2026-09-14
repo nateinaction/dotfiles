@@ -57,3 +57,18 @@ if [ -d "${nix_fonts}" ]; then
     command -v fc-cache >/dev/null 2>&1 && fc-cache -f "${HOME}/.local/share/fonts" >/dev/null 2>&1 || true
   fi
 fi
+
+# GUI apps installed into the Nix profile (e.g. Alacritty.app) live under
+# ~/.nix-profile/Applications, which Spotlight/Alfred don't index. Symlink
+# each one into ~/Applications so it's launchable/searchable like any other
+# app. Link through ~/.nix-profile (a stable symlink chezmoi/nix repoint on
+# each upgrade), never through the resolved /nix/store/<hash> path, so the
+# link keeps working across profile generations.
+nix_apps="${HOME}/.nix-profile/Applications"
+if [ "$(uname -s)" = "Darwin" ] && [ -d "${nix_apps}" ]; then
+  mkdir -p "${HOME}/Applications"
+  for app in "${nix_apps}"/*.app; do
+    [ -e "${app}" ] || continue
+    ln -sfn "${app}" "${HOME}/Applications/$(basename "${app}")"
+  done
+fi
