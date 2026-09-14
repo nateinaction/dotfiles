@@ -20,7 +20,8 @@
     "command": "~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true{{ if .work }},
+    "gopls-lsp@claude-plugins-official": true,
+    "mattpocock-skills@claude-plugins-official": true{{ if .work }},
     "fluid-platform-debugging@internal-ai-marketplace": true{{ end }}
   }{{ if .work }},
   "extraKnownMarketplaces": {
