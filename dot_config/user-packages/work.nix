@@ -2,6 +2,7 @@
 # The user-packages flake.nix merges these into the user-cli-tools profile
 # when this file exists.
 pkgs: with pkgs; [
+  acli # Atlassian Command Line Interface (Jira, Confluence, etc.)
   azure-cli # Azure command-line client (MIT)
   (google-cloud-sdk.withExtraComponents [
     google-cloud-sdk.components.gke-gcloud-auth-plugin # kubectl auth plugin for GKE clusters (Apache-2.0)
