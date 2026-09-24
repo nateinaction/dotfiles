@@ -23,6 +23,7 @@
           paths = [
             pkgs.age # Simple, modern file encryption tool (BSD-3, Go)
             pkgs.alacritty # GPU-accelerated terminal emulator (Apache-2.0, Rust)
+            pkgs.anki-bin # Spaced-repetition flashcard app, prebuilt (AGPL-3); pkgs.anki's macOS build is currently broken (anki-mac-helper version-metadata mismatch)
             pkgs.claude-code # Anthropic Claude Code CLI (unfree)
             pkgs.codex # OpenAI Codex CLI (unfree)
             pkgs.direnv # Load project-specific environments (MIT, Rust)
