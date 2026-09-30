@@ -2,7 +2,6 @@
 	excludesFile = ~/.gitignore
 	editor = ~/.nix-profile/bin/hx
 [commit]
-	template = ~/.stCommitMsg
 	gpgsign = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
