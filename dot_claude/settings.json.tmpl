@@ -18,17 +18,23 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "mattpocock-skills@claude-plugins-official": true{{ if .work }},
+    "mattpocock-skills@mattpocock": true{{ if .work }},
     "fluid-platform-debugging@internal-ai-marketplace": true{{ end }}
-  }{{ if .work }},
+  },
   "extraKnownMarketplaces": {
+    "mattpocock": {
+      "source": {
+        "source": "github",
+        "repo": "mattpocock/skills"
+      }
+    }{{ if .work }},
     "internal-ai-marketplace": {
       "source": {
         "source": "github",
         "repo": "wpengine/internal-ai-marketplace"
       }
-    }
-  }{{ end }},
+    }{{ end }}
+  },
   "effortLevel": "medium",
   "tui": "fullscreen"
 }
