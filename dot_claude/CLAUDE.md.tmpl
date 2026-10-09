@@ -62,6 +62,19 @@ triage surface.
 **Triage labels** use the canonical role names verbatim: `needs-triage`,
 `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`.
 
+#### Wayfinding operations
+
+- **Map**: an Epic labelled `wayfinder:map`; tickets are its children
+  (`parent = SK8RS-<map>`).
+- **Claim**: `acli jira workitem assign --key <key> --assignee "@me"`.
+- **Block**: `acli jira workitem link create --out <blocked> --in <blocker> --type Blocks --yes`.
+  acli's flag names and success message are the inverse of the result: wire one
+  link, confirm it with `view <blocked> --fields '*all' --json | jq .fields.issuelinks`
+  (blocked side shows "is blocked by"), then wire the rest. To reverse a link,
+  `link delete --id` it first; creating over an existing pair is a silent no-op.
+- **Read links**: only `view --fields '*all' --json` carries both directions;
+  `search --fields` rejects `issuelinks` and `link list` omits inward keys.
+
 ### Pull requests
 
 Prefix every PR title with its Jira ticket in brackets, e.g.
