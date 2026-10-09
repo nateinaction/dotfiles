@@ -49,8 +49,8 @@ Issues and specs live in Jira, default project key **SK8RS**, managed with the
 - **Comment**: `acli jira workitem comment --key SK8RS-<number> --body "..."`.
 - **Labels**: `acli jira workitem edit --key SK8RS-<number> --labels "..."` /
   `--remove-labels "..."`.
-- **Transition**: `acli jira workitem transition --key SK8RS-<number> --status "Done"`
-  (or the applicable workflow status).
+- **Transition**: `acli jira workitem transition --key SK8RS-<number> --status "Closed"`
+  (SK8RS's terminal status; there is no "Done" transition from Backlog).
 
 Confirm flags against `acli jira workitem --help` if they differ; `acli`'s CLI
 surface varies by version.
@@ -74,6 +74,9 @@ triage surface.
   `link delete --id` it first; creating over an existing pair is a silent no-op.
 - **Read links**: only `view --fields '*all' --json` carries both directions;
   `search --fields` rejects `issuelinks` and `link list` omits inward keys.
+  `search --fields key --json` returns nulls and `view --fields` with a
+  comma list including `issuelinks` errors. To read a map's children, get the
+  keys with `search --fields summary`, then `view --fields '*all' --json` each.
 
 ### Pull requests
 
