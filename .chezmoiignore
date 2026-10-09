@@ -10,4 +10,5 @@ renovate.json
 {{ if not .work }}
 .config/user-packages/work.nix
 .config/fish/conf.d/work.*.fish
+.claude/skills/atlassian
 {{ end }}
