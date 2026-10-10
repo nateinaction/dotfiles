@@ -2,8 +2,11 @@
   description = "User-scoped CLI tools installed into my Nix profile";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  # Hermes Agent is not in nixpkgs; consume upstream's flake. Deliberately no
+  # `follows` on nixpkgs so upstream's pinned, tested dependency set is used.
+  inputs.hermes-agent.url = "github:NousResearch/hermes-agent";
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, hermes-agent }:
     let
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
       forEachSystem = f:
@@ -21,6 +24,7 @@
         user-cli-tools = pkgs.buildEnv {
           name = "user-cli-tools";
           paths = [
+            hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.default # Nous Research Hermes self-improving AI agent CLI, provides `hermes` (upstream flake)
             pkgs.age # Simple, modern file encryption tool (BSD-3, Go)
             pkgs.alacritty # GPU-accelerated terminal emulator (Apache-2.0, Rust)
             pkgs.anki-bin # Spaced-repetition flashcard app, prebuilt (AGPL-3); pkgs.anki's macOS build is currently broken (anki-mac-helper version-metadata mismatch)
