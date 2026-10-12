@@ -37,6 +37,7 @@
             pkgs.git # Distributed version control system (GPL-2)
             pkgs.gnupg # GNU Privacy Guard (GPL-3)
             pkgs.helix # Post-modern modal text editor, provides `hx` (MPL-2)
+            pkgs.herdr # Agent multiplexer that lives in your terminal (Apache-2.0)
             pkgs.hey # HTTP load generator, ApacheBench (ab) replacement (Apache-2.0, Go)
             pkgs.jaq # JSON processor (jq-compatible), used by the Claude Code statusline script (MIT, Rust)
             pkgs.nerd-fonts.jetbrains-mono # JetBrainsMono Nerd Font, glyphs for starship (OFL)
