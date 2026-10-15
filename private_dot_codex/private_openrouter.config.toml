@@ -3,7 +3,7 @@
 # OPENROUTER_API_KEY comes from conf.d/openrouter.secret.fish. Command-based
 # auth makes Codex refresh its model catalog for non-OpenAI models.
 model_provider = "openrouter"
-model = "anthropic/claude-sonnet-4.6"
+model = "deepseek/deepseek-v4.1-flash"
 
 [model_providers.openrouter]
 name = "openrouter"

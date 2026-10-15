@@ -1,0 +1,10 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "options": {
+    "skills_paths": ["~/.agents/skills"]
+  },
+  "models": {
+    "large": { "provider": "openrouter", "model": "deepseek/deepseek-v4-pro" },
+    "small": { "provider": "openrouter", "model": "deepseek/deepseek-v4.1-flash" }
+  }
+}
