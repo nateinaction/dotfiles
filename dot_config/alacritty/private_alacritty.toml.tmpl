@@ -10,4 +10,4 @@ chars = "\u001B\r"
 
 [terminal.shell]
 program = "{{ .chezmoi.homeDir }}/.nix-profile/bin/fish"
-args = ["-i", "-c", "exec zellij -l welcome"]
+args = ["-i", "-c", "set -gx SHELL (status fish-path); exec herdr"]
