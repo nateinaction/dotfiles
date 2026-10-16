@@ -88,8 +88,6 @@
               pkgs.alacritty # GPU-accelerated terminal emulator (Apache-2.0, Rust)
               pkgs.anki-bin # Spaced-repetition flashcard app, prebuilt (AGPL-3); pkgs.anki's macOS build is currently broken (anki-mac-helper version-metadata mismatch)
               pkgs.claude-code # Anthropic Claude Code CLI (unfree)
-              pkgs.codex # OpenAI Codex CLI (unfree)
-              pkgs.crush # Charm's terminal AI coding agent (FSL-1.1-MIT, source-available, Go)
               pkgs.direnv # Load project-specific environments (MIT, Rust)
               pkgs.fish # Friendly interactive shell (GPL-2)
               pkgs.fzf # Command-line fuzzy finder (MIT, Go)

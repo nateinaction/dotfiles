@@ -1,6 +1,6 @@
 #!/bin/sh
 # Expose the skills listed in the mattpocock plugin manifest to every agent
-# that reads ~/.agents/skills (opencode, crush, codex). Idempotent: ln -sfn.
+# that reads ~/.agents/skills (opencode). Idempotent: ln -sfn.
 set -eu
 
 repo="$HOME/.agents/vendor/mattpocock-skills"
