@@ -7,5 +7,26 @@
         "provider": "openrouter"
       }
     }
-  ]
+  ],
+  // Cost controls for OpenRouter traffic.
+  //
+  // Response caching: identical requests (agent retries, re-runs, repeated
+  // commands) are served from OpenRouter's edge cache with zero tokens billed.
+  // The first request bills normally; every identical repeat within the TTL is
+  // free and returns in ~80-300 ms. Override the 5-minute default with
+  // "X-OpenRouter-Cache-TTL" (1-86400 seconds).
+  // https://openrouter.ai/docs/guides/features/response-caching
+  //
+  // Prompt caching and provider sticky routing need no configuration here:
+  // OpenCode already sends provider-side cache_control breakpoints and a
+  // per-session prompt_cache_key, which OpenRouter uses as its sticky routing
+  // key, keeping cache reads on the provider that holds the warm cache.
+  // https://openrouter.ai/docs/features/prompt-caching#provider-sticky-routing
+  "providers": {
+    "openrouter": {
+      "headers": {
+        "X-OpenRouter-Cache": "true"
+      }
+    }
+  }
 }
