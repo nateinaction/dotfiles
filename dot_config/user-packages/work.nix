@@ -7,6 +7,7 @@ pkgs: with pkgs; [
   (google-cloud-sdk.withExtraComponents [
     google-cloud-sdk.components.gke-gcloud-auth-plugin # kubectl auth plugin for GKE clusters (Apache-2.0)
   ])
+  oci-cli # Oracle Cloud Infrastructure command-line client (Apache-2.0/UPL)
   k3d # k3s in Docker (MIT)
   docker # Docker CLI, daemon provided by Docker Desktop/OrbStack (Apache-2.0)
 
