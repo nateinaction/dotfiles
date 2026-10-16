@@ -1,0 +1,6 @@
+# Matt Pocock's skills, cloned outside ~/.agents/skills so the per-skill links
+# made by run_onchange_link-mattpocock-skills.sh are the only entries tools see.
+[".agents/vendor/mattpocock-skills"]
+type = "git-repo"
+url = "https://github.com/mattpocock/skills.git"
+refreshPeriod = "168h"
