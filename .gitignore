@@ -1,2 +1,6 @@
 # direnv / nix dev shell state
 .direnv/
+
+# nix build result symlinks
+result
+result-*
