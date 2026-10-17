@@ -1,10 +1,17 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  // The global directives live in one file, shared with Claude Code. Naming it
+  // here rather than copying it into a global AGENTS.md keeps a single source of
+  // truth: opencode picks one global rules file, so a global AGENTS.md would
+  // shadow this rather than merge with it. The path is rendered absolute because
+  // a relative path in a global config resolves against the run's directory.
+  "instructions": ["{{ .chezmoi.homeDir }}/.claude/CLAUDE.md"],
   "plugins": [
     {
       "package": "github:nateinaction/opencode-plugin-auto-classifier",
       "options": {
-        "provider": "openrouter"
+        "provider": "openrouter",
+        "mode": "auto-mode"
       }
     }
   ],
