@@ -11,7 +11,13 @@
       "package": "github:nateinaction/opencode-plugin-auto-classifier",
       "options": {
         "provider": "openrouter",
-        "mode": "auto-mode"
+        "mode": "auto-mode",
+        "debug": true,
+        // Act on Jev's own answers when it is uncertain, rather than asking the
+        // fallback model: sampled repeatedly, the fallback flipped borderline
+        // actions between allow and deny and took 4-60s per call.
+        "onUncertain": "accept",
+        "fallbackModel": "openrouter/~deepseek/deepseek-flash-latest"
       }
     }
   ],
