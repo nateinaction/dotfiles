@@ -24,11 +24,14 @@ are not a triage surface.
   set. Epics also require `customfield_19079`, `customfield_19080`,
   `customfield_19081` and `customfield_19185`; copy their shape from an existing
   Epic. Set an Epic parent with `"parent": {"key": "SK8RS-<number>"}` under
-  `additionalAttributes`. The description must be Atlassian Document Format.
+  `additionalAttributes`. The description must be Atlassian Document Format:
+  write Markdown and convert it as in [comments.md](comments.md).
   `acli jira workitem create --generate-json` prints a template.
 - **Read**: `acli jira workitem view SK8RS-<number>`.
 - **List**: `acli jira workitem search --jql "project = SK8RS AND ..."`.
-- **Comment**: `acli jira workitem comment --key SK8RS-<number> --body "..."`.
+- **Comment**: read [comments.md](comments.md) before writing any comment.
+  It carries the comment structure and the Markdown-to-ADF step; a plain
+  `--body` posts as one unformatted block of text.
 - **Labels**: `acli jira workitem edit --key SK8RS-<number> --labels "..."` /
   `--remove-labels "..."`.
 - **Transition**: `acli jira workitem transition --key SK8RS-<number> --status "Closed"`

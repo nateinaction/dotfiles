@@ -3,6 +3,7 @@
 # when this file exists.
 pkgs: with pkgs; [
   acli # Atlassian Command Line Interface (Jira, Confluence, etc.)
+  python3 # runs the atlassian skill's md2adf.py Markdown-to-ADF converter (PSF-2.0)
   azure-cli # Azure command-line client (MIT)
   (google-cloud-sdk.withExtraComponents [
     google-cloud-sdk.components.gke-gcloud-auth-plugin # kubectl auth plugin for GKE clusters (Apache-2.0)
