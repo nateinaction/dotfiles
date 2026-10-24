@@ -7,7 +7,7 @@
   # python3Packages.fabric needs invoke<3 but nixpkgs ships invoke 3. Take
   # azure-cli from this older pin until fabric is fixed upstream, then drop it
   # and refresh the lock with `nix flake update`.
-  inputs.nixpkgs-azure.url = "github:NixOS/nixpkgs/319e4cebef10cbb636c6ea392137b52ad105336a";
+  inputs.nixpkgs-azure.url = "github:NixOS/nixpkgs/12094d07c975797c26564d941239ef90c30c73cd";
 
   outputs = { self, nixpkgs, nixpkgs-azure }:
     let
