@@ -6,7 +6,7 @@ Usage:
 
 Blocks: ATX headings, paragraphs (single newlines become line breaks, as in
 GitHub comments), bullet and ordered lists nested by indentation, pipe tables
-(first row is the header), fenced code blocks, blockquotes, GitHub-style
+(first row is the header), fenced code blocks (also inside list items), blockquotes, GitHub-style
 callouts (`> [!INFO]`, NOTE, TIP, SUCCESS, IMPORTANT, WARNING, CAUTION, ERROR)
 as panels, and `---` rules.
 
@@ -15,6 +15,7 @@ Inline: **bold**, _italic_, `code`, [text](url), bare http(s) URLs, and, when
 """
 
 import argparse
+import itertools
 import json
 import re
 import sys
@@ -172,7 +173,9 @@ def build_list(entries, depth, ctx):
             groups[-1][1].append(entry)
 
     def item(head, children):
-        content = [paragraph(head[2], ctx)]
+        content = []
+        for is_code, group in itertools.groupby(head[2], key=lambda part: isinstance(part, dict)):
+            content += list(group) if is_code else [paragraph(list(group), ctx)]
         if children:
             content.append(build_list(children, depth + 1, ctx))
         return {"type": "listItem", "content": content}
@@ -186,8 +189,9 @@ def build_list(entries, depth, ctx):
 def take_list(lines, start):
     """Collect list entries from `start`; return (entries, next index).
 
-    Each entry is (indent, marker, lines). A line indented past the list's
-    base that is not an item continues the preceding item.
+    Each entry is (indent, marker, parts); a part is a text line or a finished
+    codeBlock node. A line indented past the list's base that is not an item
+    continues the preceding item, and an indented fence adds a code block to it.
     """
     entries = []
     i = start
@@ -202,19 +206,47 @@ def take_list(lines, start):
 
     while i < len(lines):  # bounded: i advances every iteration
         line = lines[i]
-        next_is_item = i + 1 < len(lines) and continues_list(lines[i + 1])
+        next_line = lines[i + 1] if i + 1 < len(lines) else ""
+        next_continues = continues_list(next_line) or (
+            bool(FENCE.match(next_line)) and indent_of(next_line) > base
+        )
         if continues_list(line):
             m = LIST_ITEM.match(line)
             entries.append((len(m.group(1)), m.group(2), [m.group(3)]))
+        elif FENCE.match(line) and indent_of(line) > base and entries:
+            node, i = take_fence(lines, i)
+            indent, marker, parts = entries[-1]
+            entries[-1] = (indent, marker, parts + [node])
+            continue
         elif line.strip() and indent_of(line) > base and not LIST_ITEM.match(line):
-            indent, marker, text = entries[-1]
-            entries[-1] = (indent, marker, text + [line.strip()])
-        elif not line.strip() and next_is_item:
-            pass  # blank line between items of one list
+            indent, marker, parts = entries[-1]
+            entries[-1] = (indent, marker, parts + [line.strip()])
+        elif not line.strip() and next_continues:
+            pass  # blank line inside a list item or between items
         else:
             break
         i += 1
     return entries, i
+
+
+def take_fence(lines, start):
+    """Parse the fenced code block opening at `start`; return (node, next index).
+
+    Body lines lose the fence's own indentation, so a block nested in a list
+    item keeps only the indentation it has relative to the fence.
+    """
+    fence = FENCE.match(lines[start])
+    body, end = take_while(lines, start + 1, lambda l: not FENCE.match(l))
+    if end == len(lines):
+        raise ValueError(f"line {start + 1}: unclosed code fence")
+    margin = indent_of(lines[start])
+    body = [l[margin:] if indent_of(l) >= margin else l.lstrip(" ") for l in body]
+    node = {"type": "codeBlock"}
+    if fence.group(1):
+        node["attrs"] = {"language": fence.group(1)}
+    if body:
+        node["content"] = [text_node("\n".join(body))]
+    return node, end + 1
 
 
 def container(node_type, attrs, inner_lines, ctx):
@@ -274,16 +306,8 @@ def parse_blocks(lines, ctx):
         if not line.strip():
             i += 1
         elif fence:
-            body, end = take_while(lines, i + 1, lambda l: not FENCE.match(l))
-            if end == len(lines):
-                raise ValueError(f"line {i + 1}: unclosed code fence")
-            node = {"type": "codeBlock"}
-            if fence.group(1):
-                node["attrs"] = {"language": fence.group(1)}
-            if body:
-                node["content"] = [text_node("\n".join(body))]
+            node, i = take_fence(lines, i)
             blocks.append(node)
-            i = end + 1
         elif heading:
             level = len(heading.group(1))
             content = parse_inline(heading.group(2), ctx)
