@@ -29,20 +29,23 @@
           #   https://opencode.ai/update/api/latest/cli/opencode
           opencode-v2 = pkgs.stdenvNoCC.mkDerivation (finalAttrs: {
             pname = "opencode";
-            version = "2.0.30";
+            version = "2.2.0";
 
             src = pkgs.fetchurl (
               if pkgs.stdenv.hostPlatform.isDarwin
               then {
                 url = "https://opencode.ai/files/bin/${finalAttrs.version}/opencode-darwin-${if pkgs.stdenv.hostPlatform.isAarch64 then "arm64" else "x64"}.zip";
-                hash = "sha256-HVyyowJy8HDJxVttiJW9odGSnncC9ea+sCtdOhfeiWE=";
+                hash =
+                  if pkgs.stdenv.hostPlatform.isAarch64
+                  then "sha256-xxsc2WVBU5rTjip1N30vQ9KidWcomhQ3GhgumggA2z0="
+                  else "sha256-zBkaHOybnNAZLXjcBmu/SHMGORMUIvpUyHxIWoIbodU=";
               }
               else {
                 url = "https://opencode.ai/files/bin/${finalAttrs.version}/opencode-linux-${if pkgs.stdenv.hostPlatform.isAarch64 then "arm64" else "x64"}.tar.gz";
                 hash =
                   if pkgs.stdenv.hostPlatform.isAarch64
-                  then "sha256-UhHpXLYX6wThpaD6MuLg0RokizvH7RBdhMrXYcxmq3s="
-                  else "sha256-7KlhZ6EtmCGJ1PjTWVK/JtE1oTdRdI22T+F7ctUll5M=";
+                  then "sha256-Hxzg/Ae5JFqBX/qdZS27gOaw8H5b906ofSscAzn7rFI="
+                  else "sha256-bVl5cKjMRI8bmp9kVTJYSzOd06uVg7tfBj8T2D5Udo8=";
               }
             );
 
