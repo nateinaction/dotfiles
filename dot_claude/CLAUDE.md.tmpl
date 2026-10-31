@@ -9,6 +9,10 @@
 - Never co-author commits or PRs.
 - Repos clone to `~/code/<provider>/<path>`, mirroring the URL (e.g. `~/code/github.com/rupa/z/` ← `https://github.com/rupa/z/`).
 
+### Scratch files
+
+- Write throwaway files to the scratch directory (`$TMPDIR`), not the repo.
+
 ### Dependencies: use Nix
 
 {{ if stat "/run/ostree-booted" -}}
