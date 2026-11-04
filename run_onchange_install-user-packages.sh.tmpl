@@ -73,3 +73,11 @@ if [ "$(uname -s)" = "Darwin" ] && [ -d "${nix_apps}" ]; then
     ln -sfn "${app}" "${HOME}/Applications/$(basename "${app}")"
   done
 fi
+
+# Reclaim store space now that the profile may have moved to new generations.
+# This script only runs when the flake changed, i.e. when the store did too.
+# Keep 30 days of profile generations for rollback, drop older ones, then
+# delete store paths nothing references and hard-link duplicate files.
+nix profile wipe-history --older-than 30d
+nix store gc
+nix store optimise
