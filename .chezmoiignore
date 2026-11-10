@@ -13,3 +13,8 @@ renovate.json
 .claude/skills/atlassian
 .agents/skills/atlassian
 {{ end }}
+
+# Nix-first shims are only wired into PATH on macOS (see nix.env.fish.tmpl).
+{{ if ne .chezmoi.os "darwin" }}
+.local/share/nix-first-bin
+{{ end }}
