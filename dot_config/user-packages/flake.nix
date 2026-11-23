@@ -115,6 +115,7 @@
               pkgs.jaq # JSON processor (jq-compatible), used by the Claude Code statusline script (MIT, Rust)
               pkgs.nerd-fonts.jetbrains-mono # JetBrainsMono Nerd Font, glyphs for starship (OFL)
               pkgs.obsidian # Knowledge base / markdown note-taking app (proprietary, unfree)
+              pkgs.ollama # Local LLM runner, provides `ollama` (MIT, Go)
               opencode-v2 # Terminal AI coding agent v2 (MIT, pinning the standalone binary; nixpkgs only ships 1.x)
               pkgs.starship # Cross-shell prompt (ISC, Rust)
               pkgs.tailscale # Mesh VPN CLI (BSD-3)
