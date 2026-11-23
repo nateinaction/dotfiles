@@ -87,6 +87,45 @@
             };
           });
 
+          # nixpkgs builds Ollama with -DOLLAMA_MLX_BACKENDS="", so models that
+          # need the MLX runtime fail on macOS. Package the official darwin
+          # release (which bundles mlx_metal_v*) instead, pinned by version and
+          # hash. Hashes: https://github.com/ollama/ollama/releases (sha256sum.txt)
+          ollama-mlx = pkgs.stdenvNoCC.mkDerivation (finalAttrs: {
+            pname = "ollama";
+            version = "0.40.17";
+
+            src = pkgs.fetchurl {
+              url = "https://github.com/ollama/ollama/releases/download/v${finalAttrs.version}/ollama-darwin.tgz";
+              hash = "sha256-S52yDQd8Wh5S+0pvLmeR92rpRf0HybGlZHyC6SeCZlM=";
+            };
+
+            # The tarball is a flat directory; Ollama locates its runtime
+            # libraries relative to the real binary, so keep the tree intact
+            # and link only the binary into bin/.
+            sourceRoot = ".";
+            dontConfigure = true;
+            dontBuild = true;
+            # Keep the upstream Apple code signature intact.
+            dontFixup = true;
+
+            installPhase = ''
+              runHook preInstall
+              install -d $out/lib/ollama $out/bin
+              cp -R . $out/lib/ollama
+              ln -s $out/lib/ollama/ollama $out/bin/ollama
+              runHook postInstall
+            '';
+
+            meta = {
+              description = "Ollama official macOS release, bundling the MLX runtime";
+              homepage = "https://ollama.com";
+              license = pkgs.lib.licenses.mit;
+              mainProgram = "ollama";
+              platforms = [ "aarch64-darwin" ];
+            };
+          });
+
           # work.nix sees the same package set, with azure-cli from the older pin.
           workPkgs = pkgs // {
             inherit (import nixpkgs-azure { system = pkgs.stdenv.hostPlatform.system; }) azure-cli;
@@ -115,7 +154,9 @@
               pkgs.jaq # JSON processor (jq-compatible), used by the Claude Code statusline script (MIT, Rust)
               pkgs.nerd-fonts.jetbrains-mono # JetBrainsMono Nerd Font, glyphs for starship (OFL)
               pkgs.obsidian # Knowledge base / markdown note-taking app (proprietary, unfree)
-              pkgs.ollama # Local LLM runner, provides `ollama` (MIT, Go)
+              # Local LLM runner, provides `ollama` (MIT, Go). nixpkgs' build lacks
+              # the MLX runtime, so macOS takes the official release binary.
+              (if pkgs.stdenv.hostPlatform.isDarwin then ollama-mlx else pkgs.ollama)
               opencode-v2 # Terminal AI coding agent v2 (MIT, pinning the standalone binary; nixpkgs only ships 1.x)
               pkgs.starship # Cross-shell prompt (ISC, Rust)
               pkgs.tailscale # Mesh VPN CLI (BSD-3)
@@ -161,7 +202,7 @@
           };
 
           default = self.packages.${pkgs.stdenv.hostPlatform.system}.user-cli-tools;
-          inherit opencode-v2;
+          inherit opencode-v2 ollama-mlx;
         });
     };
 }
