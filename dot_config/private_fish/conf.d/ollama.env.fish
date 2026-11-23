@@ -4,6 +4,11 @@
 # Requires `ollama serve` to be running. The Vertex variables from
 # claude-code.env.fish are unset for this session so Claude Code talks to
 # Ollama instead of Vertex AI.
+# Local-model tuning: CLAUDE_CODE_ATTRIBUTION_HEADER=0 stops Claude Code
+# putting a per-request value at the start of the system prompt, which defeats
+# Ollama's prefix cache (every request reprocessed the full ~36k prompt).
+# --strict-mcp-config with no --mcp-config loads no MCP servers, keeping the
+# prompt small so prompt processing stays under Ollama's request time limit.
 function claude-local
     set -l model inkling-2-mini
     set -q CLAUDE_LOCAL_MODEL; and set model $CLAUDE_LOCAL_MODEL
@@ -11,5 +16,6 @@ function claude-local
         ANTHROPIC_BASE_URL=http://localhost:11434 \
         ANTHROPIC_AUTH_TOKEN=ollama \
         ANTHROPIC_API_KEY= \
-        command claude --model $model $argv
+        CLAUDE_CODE_ATTRIBUTION_HEADER=0 \
+        command claude --model $model --strict-mcp-config $argv
 end
