@@ -93,11 +93,11 @@
           # hash. Hashes: https://github.com/ollama/ollama/releases (sha256sum.txt)
           ollama-mlx = pkgs.stdenvNoCC.mkDerivation (finalAttrs: {
             pname = "ollama";
-            version = "0.40.17";
+            version = "0.40.18";
 
             src = pkgs.fetchurl {
               url = "https://github.com/ollama/ollama/releases/download/v${finalAttrs.version}/ollama-darwin.tgz";
-              hash = "sha256-S52yDQd8Wh5S+0pvLmeR92rpRf0HybGlZHyC6SeCZlM=";
+              hash = "sha256-AVJh9DTTHX8Hgfi6a1nMjh9w7LVipObbRN/dXgL35WI=";
             };
 
             # The tarball is a flat directory; Ollama locates its runtime
