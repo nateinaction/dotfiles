@@ -10,6 +10,29 @@
     {
       "package": "github:nateinaction/opencode-plugin-auto-classifier",
       "options": {
+{{- if .work }}
+        // Work machine: the classifier runs locally on Ollama
+        // (`ollama pull pplx-decider-flash`, needs `ollama serve`), through its
+        // System One endpoint. `provider` only picks defaults, so the explicit
+        // endpoint and model win; the dummy apiKey stops the OpenRouter key
+        // being sent to localhost. See nateinaction/dotfiles#62.
+        "provider": "openrouter",
+        "endpoint": "http://localhost:11434/v1/systemone",
+        "model": "pplx-decider-flash",
+        "apiKey": "ollama",
+        // A cold model load can exceed the 10s default.
+        "timeoutMs": 30000,
+        "mode": "auto-mode",
+        "debug": true,
+        // Decide uncertain verdicts from the facts ("tiered"), not from the
+        // classifier's own answers. In an eval of 110 cases pplx-decider-flash
+        // passed 104 under tiered, failing only toward denial; "accept" would
+        // have allowed key exfiltration over DNS and `git clean -fdx`.
+        "onUncertain": "tiered",
+        // Local fallback for when the classifier fails. With "tiered" it is not
+        // asked about uncertain verdicts, only when the classifier call errors.
+        "fallbackModel": "ollama/inkling-2-mini:latest"
+{{- else }}
         "provider": "openrouter",
         "mode": "auto-mode",
         "debug": true,
@@ -18,6 +41,7 @@
         // actions between allow and deny and took 4-60s per call.
         "onUncertain": "accept",
         "fallbackModel": "openrouter/~deepseek/deepseek-flash-latest"
+{{- end }}
       }
     }
   ],
